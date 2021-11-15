@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/session_ProfileFragment">
+    <fragment
+        android:id="@+id/session_ProfileFragment"
+        android:name="com.example.gamection.Session_ProfileFragment"
+        android:label="fragment_session__profile"
+        tools:layout="@layout/fragment_session__profile" >
+        <action
+            android:id="@+id/action_session_ProfileFragment_to_session_LibraryFragment2"
+            app:destination="@id/session_LibraryFragment" />
+        <action
+            android:id="@+id/action_session_ProfileFragment_to_session_FriendsFragment"
+            app:destination="@id/session_FriendsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/session_LibraryFragment"
+        android:name="com.example.gamection.Session_LibraryFragment"
+        android:label="fragment_session__library"
+        tools:layout="@layout/fragment_session__library" />
+    <fragment
+        android:id="@+id/session_FriendsFragment"
+        android:name="com.example.gamection.Session_FriendsFragment"
+        android:label="fragment_session__friends"
+        tools:layout="@layout/fragment_session__friends" />
+</navigation>

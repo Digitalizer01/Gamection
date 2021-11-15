@@ -22,8 +22,21 @@
     </string-array>
     <string name="register_boton_registrarse">Registrarse</string>
     <string name="register_confirmacion">¡Gracias por registrarte! Inicia sesión para acceder a tu cuenta.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <!-- Profile -->
+    <string name="profile_nombre_usuario">Juan</string>
+    <string name="profile_estado_perfil">Ocupado</string>
+    <string name="profile_boton_editar_perfil">EDITAR PERFIL</string>
+    <string name="profile_consultar_coleccion">Consultar colección</string>
+    <string name="profile_juego_reciente">Juego reciente</string>
+    <string name="profile_genero_favorito">Género favorito</string>
+    <string name="profile_consola_favorita">Consola favorita</string>
+    <string name="profile_boton_amigos">Amigos</string>
+    <!-- Library -->
+    <string name="library_console">Consola 1</string>
+    <string name="library_genre">Género 1</string>
+    <string name="library_game">Juego 1</string>
+    <!-- Friends -->
+    <string name="friends__boton_name">Pepe</string>
+    <string name="friends_boton_add">Agregar</string>
 
 </resources>

@@ -17,10 +17,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
+ * Use the [Session_ProfileFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RegisterFragment : Fragment() {
+class Session_ProfileFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,54 +38,47 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        return inflater.inflate(R.layout.fragment_session__profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
         val nal = Navigation.findNavController(view)
-        // Al pulsar el botón, mostrar Toast que diga que se ha creado una cuenta.
-        val Button = view.findViewById<TextView>(R.id.button_Registrarse)
-        val emailText = view.findViewById<TextView>(R.id.editTextText_Email)
-        val passText = view.findViewById<TextView>(R.id.editTextText_Password)
-        Button.setOnClickListener {
-            if (emailText.text.isNotEmpty() && passText.text.isNotEmpty()) {
-                FirebaseAuth.getInstance()
-                    .createUserWithEmailAndPassword(
-                        emailText.text.toString(),
-                        passText.text.toString()
-                    ).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val toast = Toast.makeText(context, "Registrado", Toast.LENGTH_SHORT)
-                            toast.setMargin(50f, 50f)
-                            toast.show()
-                            nal.navigate(R.id.perfil)
-                        } else {
-                            val toast = Toast.makeText(context, "No registrado", Toast.LENGTH_SHORT)
-                            toast.setMargin(50f, 50f)
-                            toast.show()
-                        }
-                    }
-            }
+        val button_library = view.findViewById<TextView>(R.id.button_consultar_coleccion)
+        val button_friends = view.findViewById<TextView>(R.id.button_amigos)
+
+        val user = FirebaseAuth.getInstance().currentUser
+
+
+
+        val toast =
+            Toast.makeText(context, user?.email.toString(), Toast.LENGTH_SHORT)
+        toast.setMargin(50f, 50f)
+        toast.show()
+
+        button_library.setOnClickListener {
+            nal.navigate(R.id.session_LibraryFragment)
         }
+        button_friends.setOnClickListener {
+            nal.navigate(R.id.session_FriendsFragment)
+        }
+
     }
 
     companion object {
-
-
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
+         * @return A new instance of fragment Session_ProfileFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            RegisterFragment().apply {
+            Session_ProfileFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

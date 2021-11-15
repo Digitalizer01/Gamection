@@ -17,5 +17,5 @@
         android:id="@+id/perfil"
         android:name="com.example.gamection.Perfil"
         android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_register_confirmation" />
 </navigation>
