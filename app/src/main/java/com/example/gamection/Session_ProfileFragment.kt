@@ -1,5 +1,6 @@
 package com.example.gamection
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,14 +52,17 @@ class Session_ProfileFragment : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser
 
 
-
         val toast =
             Toast.makeText(context, user?.email.toString(), Toast.LENGTH_SHORT)
         toast.setMargin(50f, 50f)
         toast.show()
 
+
+
         button_library.setOnClickListener {
-            nal.navigate(R.id.session_LibraryFragment)
+            val bundle = Bundle()
+            bundle.putString("link", "http://yourlink.com/policy")
+            nal.navigate(R.id.session_LibraryFragment, bundle)
         }
         button_friends.setOnClickListener {
             nal.navigate(R.id.session_FriendsFragment)

@@ -3,8 +3,6 @@ package com.example.gamection
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.se.omapi.Session
-import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val Button = findViewById<TextView>(R.id.button_Login)
-        val emailText = findViewById<TextView>(R.id.editTextText_User_Name)
+        val emailText = findViewById<TextView>(R.id.editTextText_User_Email)
         val passText = findViewById<TextView>(R.id.editTextTextUser_Password)
         Button.setOnClickListener {
             if (emailText.text.isNotEmpty() && passText.text.isNotEmpty()) {
@@ -43,7 +41,14 @@ class MainActivity : AppCompatActivity() {
                             toast.show()
                             //val Button = findViewById<TextView>(R.id.button_Login)
                             //Button.setOnClickListener {
-                            startActivity(Intent(this, SessionActivity::class.java))
+
+                            // Pasamos la información a SessionActivity
+
+                            val i = Intent(this, SessionActivity::class.java).apply {
+                                putExtra("Data","DatoNuevo")
+                            }
+
+                            startActivity(i)
                         } else {
                             val toast = Toast.makeText(this, "No logeado", Toast.LENGTH_SHORT)
                             toast.setMargin(50f, 50f)

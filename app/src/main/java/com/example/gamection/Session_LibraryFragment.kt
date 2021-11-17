@@ -1,10 +1,15 @@
 package com.example.gamection
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
+import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +40,21 @@ class Session_LibraryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_session__library, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+        val intent = Intent (requireContext(), Session_LibraryFragment::class.java)
+        val args = this.arguments
+        val inputData = args?.get("link")
+
+        val toast =
+            Toast.makeText(context, inputData.toString(), Toast.LENGTH_SHORT)
+        toast.setMargin(50f, 50f)
+        toast.show()
+
     }
 
     companion object {

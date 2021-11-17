@@ -2,7 +2,7 @@
     <string name="app_name">Gamection</string>
 
     <!--Login-->
-    <string name="user_name">Nombre usuario</string>
+    <string name="user_email">Email usuario</string>
     <string name="user_password">Contraseña</string>
     <string name="user_login_button">Iniciar sesión</string>
     <string name="user_register">¿No tiene cuenta?</string>
