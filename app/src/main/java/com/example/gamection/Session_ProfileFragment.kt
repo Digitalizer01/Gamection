@@ -1,15 +1,25 @@
 package com.example.gamection
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.renderscript.Sampler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +52,33 @@ class Session_ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_session__profile, container, false)
     }
 
+    fun nombres_usuarios_bd(){
+        var consulta_2 =
+            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("usuarios")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                        val snapshotIterator = dataSnapshot.children
+                        val iterator: Iterator<DataSnapshot> =
+                            snapshotIterator.iterator()
+
+                        while (iterator.hasNext()) {
+                            Log.i(
+                                TAG,
+                                "Value = " + iterator.next().child("nombre").value
+                            )
+                        }
+
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // Failed to read value
+                    }
+                })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +93,28 @@ class Session_ProfileFragment : Fragment() {
             Toast.makeText(context, user?.email.toString(), Toast.LENGTH_SHORT)
         toast.setMargin(50f, 50f)
         toast.show()
+
+        var consulta =
+            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("usuarios/" + user?.uid.toString())
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val user_app = dataSnapshot.getValue(UserInfo::class.java)
+
+                        // Check for null
+                        if (user_app == null) {
+                            return
+                        }
+
+                        nombres_usuarios_bd()
+
+
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // Failed to read value
+                    }
+                })
 
 
 
