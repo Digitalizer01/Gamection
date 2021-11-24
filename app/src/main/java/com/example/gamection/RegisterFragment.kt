@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +25,7 @@ class RegisterFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,10 +49,21 @@ class RegisterFragment : Fragment() {
         val nal = Navigation.findNavController(view)
         // Al pulsar el botón, mostrar Toast que diga que se ha creado una cuenta.
         val Button = view.findViewById<TextView>(R.id.button_Registrarse)
+        var nombreText = view.findViewById<TextView>(R.id.editTextText_Nombre)
+        var usuarioText = view.findViewById<TextView>(R.id.editTextText_Usuario)
+        var fechanacimientoText = view.findViewById<TextView>(R.id.editText_Fecha_Nacimiento)
         val emailText = view.findViewById<TextView>(R.id.editTextText_Email)
         val passText = view.findViewById<TextView>(R.id.editTextText_Password)
+
+        // Spinner
+
+
+        var sexoOption = view.findViewById(R.id.spinner_sexo) as Spinner
+        var opciones = arrayOf("Hombre", "Mujer")
+        sexoOption.adapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_expandable_list_item_1, opciones)
+
         Button.setOnClickListener {
-            if (emailText.text.isNotEmpty() && passText.text.isNotEmpty()) {
+            if (emailText.text.isNotEmpty() && passText.text.isNotEmpty() && nombreText.text.isNotEmpty() && usuarioText.text.isNotEmpty() && fechanacimientoText.text.isNotEmpty()) {
                 FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(
                         emailText.text.toString(),
@@ -60,6 +73,28 @@ class RegisterFragment : Fragment() {
                             val toast = Toast.makeText(context, "Registrado", Toast.LENGTH_SHORT)
                             toast.setMargin(50f, 50f)
                             toast.show()
+                            val user = FirebaseAuth.getInstance().currentUser
+
+                            // Nombre
+                            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference("usuarios/" + user?.uid.toString() + "/nombre")
+                                .setValue(nombreText.text.toString())
+
+                            // Usuario
+                            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference("usuarios/" + user?.uid.toString() + "/usuario")
+                                .setValue(usuarioText.text.toString())
+
+                            // Fecha de nacimiento
+                            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference("usuarios/" + user?.uid.toString() + "/fechanacimiento")
+                                .setValue(fechanacimientoText.text.toString())
+
+                            // Sexo
+                            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                                .getReference("usuarios/" + user?.uid.toString() + "/sexo")
+                                .setValue(sexoOption.selectedItem.toString())
+
                             nal.navigate(R.id.perfil)
                         } else {
                             val toast = Toast.makeText(context, "No registrado", Toast.LENGTH_SHORT)
@@ -67,6 +102,13 @@ class RegisterFragment : Fragment() {
                             toast.show()
                         }
                     }
+            }
+            else{
+
+                val toast = Toast.makeText(context, "Rellene todos los campos", Toast.LENGTH_SHORT)
+                toast.setMargin(50f, 50f)
+                toast.show()
+
             }
         }
     }
