@@ -115,11 +115,17 @@ class Session_ProfileFragment : Fragment() {
                             // Recorremos todas las consolas
                             var lista_consolas = hm_biblioteca_keys.keys.iterator()
                             // TODO Tenemos una serie de consolas ya definidas. Vamos a recorrer haciendo un get de la key para obtener los juegos
+                            var keysList = ArrayList(hm_biblioteca_keys.keys);
+                            var valuesList = ArrayList(hm_biblioteca_keys.values);
 
-                            // Recorremos todos los juegos
+                            println("Keys list : $keysList")
+                            println("Values list : $valuesList")
+
+                            //Recorremos todos los juegos
+
+
 
                             // Vemos la fecha de cada uno
-
 
                             var hm_n64 =
                                 hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
