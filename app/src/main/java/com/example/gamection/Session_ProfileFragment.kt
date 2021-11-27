@@ -20,6 +20,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import android.graphics.Picture
+import java.io.Serializable
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +55,7 @@ class Session_ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_session__profile, container, false)
     }
 
-    fun nombres_usuarios_bd(){
+    fun nombres_usuarios_bd() {
         var consulta_2 =
             Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("usuarios")
@@ -70,6 +73,79 @@ class Session_ProfileFragment : Fragment() {
                             )
                         }
 
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // Failed to read value
+                    }
+                })
+    }
+
+
+    fun juego_reciente_bd(id_usuario: String): String {
+        var nombre_juego: String = ""
+
+        var consulta_2 =
+            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                .getReference("usuarios/" + id_usuario + "/")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                        val snapshotIterator = dataSnapshot.children
+                        val iterator: Iterator<DataSnapshot> =
+                            snapshotIterator.iterator()
+
+                        var ultima_fecha: String = ""
+
+                        var hm_biblioteca: HashMap<String, String>
+                        var hm_consolas: HashMap<String, String>
+                        var hm_juegos: HashMap<String, String>
+
+                        while (iterator.hasNext()) {
+                            var variable_consulta: HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>> =
+                                iterator.next()
+                                    .child("consolas").value as HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>>
+
+                            var hm_biblioteca_keys = variable_consulta.toMutableMap()
+                            var hm_consolas_keys = hm_biblioteca_keys.toMutableMap()
+                            var hm_juegos_keys = hm_consolas_keys.toMutableMap()
+
+                            // Iniciamos una fecha como más reciente
+
+                            // Recorremos todas las consolas
+                            var lista_consolas = hm_biblioteca_keys.keys.iterator()
+                            // TODO Tenemos una serie de consolas ya definidas. Vamos a recorrer haciendo un get de la key para obtener los juegos
+
+                            // Recorremos todos los juegos
+
+                            // Vemos la fecha de cada uno
+
+
+                            var hm_n64 =
+                                hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
+                                    key = "N64"
+                                )
+                            var hm_ps1 =
+                                hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
+                                    key = "PS1"
+                                )
+
+                            //hm_juegos = variable_consulta.getValue("N64")
+                            //var subject: HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>> =
+                            //    variable_consulta as HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>>
+
+                            // var subject: BibliotecaHM = variable_consulta as BibliotecaHM
+
+
+                            if (variable_consulta != null) {
+                                Log.i(
+                                    TAG,
+                                    "Value = " + variable_consulta
+                                )
+                            }
+
+
+                        }
 
                     }
 
@@ -77,6 +153,7 @@ class Session_ProfileFragment : Fragment() {
                         // Failed to read value
                     }
                 })
+        return nombre_juego
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,6 +184,7 @@ class Session_ProfileFragment : Fragment() {
                         }
 
                         nombres_usuarios_bd()
+                        juego_reciente_bd(user?.uid.toString())
 
 
                     }
