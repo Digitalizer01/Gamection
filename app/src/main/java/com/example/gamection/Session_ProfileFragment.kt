@@ -121,20 +121,45 @@ class Session_ProfileFragment : Fragment() {
                             println("Keys list : $keysList")
                             println("Values list : $valuesList")
 
+                            var keyarray = keysList.toArray()
+
+                            var elemento1 = keyarray[0].toString()
+                            var size_elemento = keyarray.size
+
+                            var hm_juegos =
+                                hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
+                                    key = ""
+                                )
+
+                            var nombre_juego_reciente = arrayListOf<String>()
+                            var genero_juego_reciente = ""
+                            var fecha_adicion_juego_reciente = ""
+
+                            for ( nombre_juego in keyarray )
+                            {
+                                hm_juegos =
+                                    hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
+                                        key = nombre_juego.toString()
+                                    )
+
+                                var keysList1 = ArrayList(hm_juegos?.keys);
+                                var valuesList1 = ArrayList(hm_juegos?.values);
+                                println("Keys list : $keysList1")
+                                println("Values list : $valuesList1")
+
+
+                            }
+
+
+
+
                             //Recorremos todos los juegos
 
 
 
                             // Vemos la fecha de cada uno
 
-                            var hm_n64 =
-                                hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
-                                    key = "N64"
-                                )
-                            var hm_ps1 =
-                                hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
-                                    key = "PS1"
-                                )
+
 
                             //hm_juegos = variable_consulta.getValue("N64")
                             //var subject: HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>> =
