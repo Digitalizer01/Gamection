@@ -81,6 +81,9 @@ class Session_ProfileFragment : Fragment() {
                 })
     }
 
+    fun fecha_mayor(fecha_1: List<String>, fecha_2: List<String>){
+
+    }
 
     fun juego_reciente_bd(id_usuario: String): String {
         var nombre_juego: String = ""
@@ -131,10 +134,12 @@ class Session_ProfileFragment : Fragment() {
                                     key = ""
                                 )
 
-                            var nombre_juego_reciente = arrayListOf<String>()
+                            var hm_datos_juego = HashMap<String, String>()
+
+                            var nombre_juego_reciente = ""
                             var genero_juego_reciente = ""
                             var fecha_adicion_juego_reciente = ""
-
+                            var parts: List<String>
                             for ( nombre_juego in keyarray )
                             {
                                 hm_juegos =
@@ -147,6 +152,13 @@ class Session_ProfileFragment : Fragment() {
                                 println("Keys list : $keysList1")
                                 println("Values list : $valuesList1")
 
+                                nombre_juego_reciente = keysList1[0]
+
+                                hm_datos_juego = valuesList1[0]
+                                genero_juego_reciente = hm_datos_juego.getValue("genero") // Get Value.
+                                fecha_adicion_juego_reciente = hm_datos_juego.getValue("fecha_adicion") // Get Value.
+                                parts = fecha_adicion_juego_reciente.split("/")
+                                print(parts)
 
                             }
 
