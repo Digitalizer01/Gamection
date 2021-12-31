@@ -1,27 +1,28 @@
 package com.example.gamection
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
-import android.renderscript.Sampler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import android.graphics.Picture
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.io.Serializable
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -81,8 +82,114 @@ class Session_ProfileFragment : Fragment() {
                 })
     }
 
-    fun fecha_mayor(fecha_1: List<String>, fecha_2: List<String>){
+    // Función que devuelve TRUE si fecha_1 es posterior que fecha_2.
+    // Devuelve FALSE si no lo es.
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun fecha_reciente(fecha_1: List<String>, fecha_2: List<String>): Boolean {
+        var mayor = false;
+        var anio_fecha_1 = fecha_1[2];
+        var mes_fecha_1 = fecha_1[1];
+        var dia_fecha_1 = fecha_1[0];
 
+        var anio_fecha_2 = fecha_2[2];
+        var mes_fecha_2 = fecha_2[1];
+        var dia_fecha_2 = fecha_2[0];
+
+        var formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        var date_fecha_1 = LocalDate.parse("$dia_fecha_1-$mes_fecha_1-$anio_fecha_1", formatter);
+        var date_fecha_2 = LocalDate.parse("$dia_fecha_2-$mes_fecha_2-$anio_fecha_2", formatter);
+
+        return date_fecha_1.isAfter(date_fecha_2);
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun juego_reciente_aux(
+        lista_juegos: ArrayList<String>,
+        lista_datos_juegos: ArrayList<java.util.HashMap<String, String>>
+    ): String {
+        print("Hola")
+        print("Hola")
+        print("Hola")
+        print("Hola")
+        print("Hola")
+        print("Hola")
+
+        var fecha_aux = "01/01/0001";
+        var fecha_aux_array = fecha_aux.split("/");
+        var juego_reciente = ""
+        var genero_reciente = ""
+
+        var array_juego_reciente = arrayOf("", "", "") // Juego, genero, fecha
+
+        // Recorremos la lista de juegos
+        for (i in 0..(lista_juegos.size - 1)) {
+            // Obtenemos el juego y sus datos
+            // Comprobamos si el juego actual es más reciente o no que el que tenemos como referencia.
+
+            var fecha_aux_actual = lista_datos_juegos[i].getValue("fecha_adicion");
+            var fecha_aux_array_actual = fecha_aux_actual.split("/");
+
+            if (fecha_reciente(fecha_aux_array_actual, fecha_aux_array)) {
+                // Actualizamos el juego mas reciente.
+                fecha_aux = lista_datos_juegos[i].getValue("fecha_adicion");
+                juego_reciente = lista_juegos[i];
+                fecha_aux_array = fecha_aux.split("/");
+                genero_reciente = lista_datos_juegos[i].getValue("genero");
+
+                array_juego_reciente[0] = juego_reciente;
+                array_juego_reciente[1] = lista_datos_juegos[i].getValue("genero");
+                array_juego_reciente[2] = fecha_aux;
+
+                print("Hola")
+            }
+        }
+        return (juego_reciente + "|" + fecha_aux + "|" + genero_reciente);
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun juego_reciente_final(lista_juegos: ArrayList<String>): String {
+        var juego = "";
+        var juego_mas_reciente = "nombrejuego|01/01/0001|generojuego";
+        for (juego in lista_juegos) {
+            var juego_aux = juego.split("|");
+
+            // Cogemos el campo de fecha del juego actual
+            var fecha_juego_aux = juego_aux[1]
+            var fecha_juego_aux_array = fecha_juego_aux.split("/");
+
+            var anio_fecha_1 = fecha_juego_aux_array[2];
+            var mes_fecha_1 = fecha_juego_aux_array[1];
+            var dia_fecha_1 = fecha_juego_aux_array[0];
+
+            // Cogemos el campo fecha del juego más reciente
+
+            var fecha_juego_mas_reciente_aux = juego_mas_reciente.split("|");
+            var fecha_juego_juego_mas_reciente_auxaux = fecha_juego_mas_reciente_aux[1];
+            var fecha_juego_mas_reciente_aux_array = fecha_juego_juego_mas_reciente_auxaux.split("/");
+
+            var anio_fecha_2 = fecha_juego_mas_reciente_aux_array[2];
+            var mes_fecha_2 = fecha_juego_mas_reciente_aux_array[1];
+            var dia_fecha_2 = fecha_juego_mas_reciente_aux_array[0];
+
+            // Construimos las fechas
+            var formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            var date_fecha_1 = LocalDate.parse("$dia_fecha_1-$mes_fecha_1-$anio_fecha_1", formatter);
+            var date_fecha_2 = LocalDate.parse("$dia_fecha_2-$mes_fecha_2-$anio_fecha_2", formatter);
+
+            // Comparamos si la fecha del juego actual es más reciente que la del
+            // más reciente.
+            if(date_fecha_1.isAfter(date_fecha_2)){
+                // Es más reciente la fecha del juego actual que la del anterior más reciente.
+                // Vamos a sustituirla.
+
+                juego_mas_reciente = juego_aux[0] + "|" + juego_aux[1] + "|" + juego_aux[2];
+            }
+
+
+            print("hola")
+        }
+
+        return juego_mas_reciente;
     }
 
     fun juego_reciente_bd(id_usuario: String): String {
@@ -92,17 +199,12 @@ class Session_ProfileFragment : Fragment() {
             Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
                 .getReference("usuarios/" + id_usuario + "/")
                 .addValueEventListener(object : ValueEventListener {
+                    @RequiresApi(Build.VERSION_CODES.O)
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                         val snapshotIterator = dataSnapshot.children
                         val iterator: Iterator<DataSnapshot> =
                             snapshotIterator.iterator()
-
-                        var ultima_fecha: String = ""
-
-                        var hm_biblioteca: HashMap<String, String>
-                        var hm_consolas: HashMap<String, String>
-                        var hm_juegos: HashMap<String, String>
 
                         while (iterator.hasNext()) {
                             var variable_consulta: HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>> =
@@ -111,12 +213,10 @@ class Session_ProfileFragment : Fragment() {
 
                             var hm_biblioteca_keys = variable_consulta.toMutableMap()
                             var hm_consolas_keys = hm_biblioteca_keys.toMutableMap()
-                            var hm_juegos_keys = hm_consolas_keys.toMutableMap()
 
                             // Iniciamos una fecha como más reciente
 
                             // Recorremos todas las consolas
-                            var lista_consolas = hm_biblioteca_keys.keys.iterator()
                             // TODO Tenemos una serie de consolas ya definidas. Vamos a recorrer haciendo un get de la key para obtener los juegos
                             var keysList = ArrayList(hm_biblioteca_keys.keys);
                             var valuesList = ArrayList(hm_biblioteca_keys.values);
@@ -125,9 +225,8 @@ class Session_ProfileFragment : Fragment() {
                             println("Values list : $valuesList")
 
                             var keyarray = keysList.toArray()
+                            var valuearray = valuesList.toArray()
 
-                            var elemento1 = keyarray[0].toString()
-                            var size_elemento = keyarray.size
 
                             var hm_juegos =
                                 hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
@@ -139,46 +238,44 @@ class Session_ProfileFragment : Fragment() {
                             var nombre_juego_reciente = ""
                             var genero_juego_reciente = ""
                             var fecha_adicion_juego_reciente = ""
-                            var parts: List<String>
-                            for ( nombre_juego in keyarray )
-                            {
+                            var fecha_adicion_juego_reciente_array: List<String>
+
+                            fecha_adicion_juego_reciente = "01/01/0001";
+                            fecha_adicion_juego_reciente_array =
+                                fecha_adicion_juego_reciente.split("/");
+
+                            // Recorremos por consolas
+
+                            var lista_juegos_fechados: ArrayList<String>
+                            lista_juegos_fechados = arrayListOf()
+                            for (nombre_consola in keyarray) {
+                                // Obtenemos el juego y sus datos
                                 hm_juegos =
                                     hm_consolas_keys.get<Serializable, java.util.HashMap<String, java.util.HashMap<String, String>>>(
-                                        key = nombre_juego.toString()
+                                        key = nombre_consola.toString()
                                     )
 
-                                var keysList1 = ArrayList(hm_juegos?.keys);
-                                var valuesList1 = ArrayList(hm_juegos?.values);
+                                var keysList1 = ArrayList(hm_juegos?.keys); // Nombre del juego
+                                var valuesList1 = ArrayList(hm_juegos?.values); // Datos del juego
                                 println("Keys list : $keysList1")
                                 println("Values list : $valuesList1")
+                                //(juego_reciente_aux(keysList1, valuesList1)
+                                lista_juegos_fechados.add(
+                                    juego_reciente_aux(
+                                        keysList1,
+                                        valuesList1
+                                    )
+                                );
+                                print("Hola")
+                                // var lista_fechas: ArrayList<String>
+                                // lista_fechas.add(juego_reciente_aux(keysList1, valuesList1));
 
-                                nombre_juego_reciente = keysList1[0]
-
-                                hm_datos_juego = valuesList1[0]
-                                genero_juego_reciente = hm_datos_juego.getValue("genero") // Get Value.
-                                fecha_adicion_juego_reciente = hm_datos_juego.getValue("fecha_adicion") // Get Value.
-                                parts = fecha_adicion_juego_reciente.split("/")
-                                print(parts)
 
                             }
 
+                            var juego_final = juego_reciente_final(lista_juegos_fechados);
 
-
-
-                            //Recorremos todos los juegos
-
-
-
-                            // Vemos la fecha de cada uno
-
-
-
-                            //hm_juegos = variable_consulta.getValue("N64")
-                            //var subject: HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>> =
-                            //    variable_consulta as HashMap<HashMap<String, String>, HashMap<String, HashMap<String, String>>>
-
-                            // var subject: BibliotecaHM = variable_consulta as BibliotecaHM
-
+                            print("hola");
 
                             if (variable_consulta != null) {
                                 Log.i(
