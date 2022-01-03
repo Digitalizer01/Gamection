@@ -35,8 +35,22 @@
     <string name="library_console">Consola 1</string>
     <string name="library_genre">Género 1</string>
     <string name="library_game">Juego 1</string>
+
+    <string-array name="library_add_game_console">
+        <item>PS1</item>
+        <item>PS2</item>
+        <item>PS3</item>
+        <item>PSP</item>
+        <item>N64</item>
+        <item>GameCube</item>
+        <item>DS</item>
+        <item>GBA</item>
+        <item>Wii</item>
+    </string-array>
     <!-- Friends -->
     <string name="friends__boton_name">Pepe</string>
     <string name="friends_boton_add">Agregar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

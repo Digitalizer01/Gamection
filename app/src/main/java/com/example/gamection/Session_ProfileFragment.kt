@@ -54,6 +54,7 @@ class Session_ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_session__profile, container, false)
     }
 
@@ -420,7 +421,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_ps1 = keysList1.size
                                         }
                                     }
@@ -439,7 +441,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_ps2 = keysList1.size
                                         }
                                     }
@@ -458,7 +461,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_ps3 = keysList1.size
                                         }
                                     }
@@ -477,7 +481,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_psp = keysList1.size
                                         }
                                     }
@@ -496,7 +501,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_n64 = keysList1.size
                                         }
                                     }
@@ -515,7 +521,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_gamecube = keysList1.size
                                         }
                                     }
@@ -534,7 +541,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_ds = keysList1.size
                                         }
                                     }
@@ -553,7 +561,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_gba = keysList1.size
                                         }
                                     }
@@ -572,7 +581,8 @@ class Session_ProfileFragment : Fragment() {
                                                     key = nombre_consola.toString()
                                                 )
 
-                                            var keysList1 = ArrayList(hm_juegos?.keys) // Lista de juegos
+                                            var keysList1 =
+                                                ArrayList(hm_juegos?.keys) // Lista de juegos
                                             cantidad_wii = keysList1.size
                                         }
                                     }
@@ -595,12 +605,13 @@ class Session_ProfileFragment : Fragment() {
                             val maxWith = lista_consolas.maxByOrNull { it.value }
                             var pantalla_consola_favorita =
                                 view?.findViewById(R.id.text_consola_favorita) as TextView
-                            var aux = pantalla_consola_favorita.setText("Consola favorita:" +
-                                    "\n" +
-                                    "- " + maxWith?.key.toString())
+                            var aux = pantalla_consola_favorita.setText(
+                                "Consola favorita:" +
+                                        "\n" +
+                                        "- " + maxWith?.key.toString()
+                            )
 
                             print("hola")
-
 
 
                         } catch (e: Exception) {
@@ -631,32 +642,10 @@ class Session_ProfileFragment : Fragment() {
         toast.setMargin(50f, 50f)
         toast.show()
 
-        var consulta =
-            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
-                .getReference("usuarios/" + user?.uid.toString())
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val user_app = dataSnapshot.getValue(UserInfo::class.java)
-
-                        // Check for null
-                        if (user_app == null) {
-                            return
-                        }
-
-                        nombres_usuarios_bd()
-                        juego_reciente_bd(user?.uid.toString())
-                        poner_nombre_usuario(user?.uid.toString())
-                        consola_favorita(user?.uid.toString())
-
-
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        // Failed to read value
-                    }
-                })
-
-
+        nombres_usuarios_bd()
+        juego_reciente_bd(user?.uid.toString())
+        poner_nombre_usuario(user?.uid.toString())
+        consola_favorita(user?.uid.toString())
 
         button_library.setOnClickListener {
             val bundle = Bundle()

@@ -20,10 +20,19 @@
         android:id="@+id/session_LibraryFragment"
         android:name="com.example.gamection.Session_LibraryFragment"
         android:label="fragment_session__library"
-        tools:layout="@layout/fragment_session__library" />
+        tools:layout="@layout/fragment_session__library" >
+        <action
+            android:id="@+id/action_session_LibraryFragment_to_session_library_add_game"
+            app:destination="@id/session_library_add_game" />
+    </fragment>
     <fragment
         android:id="@+id/session_FriendsFragment"
         android:name="com.example.gamection.Session_FriendsFragment"
         android:label="fragment_session__friends"
         tools:layout="@layout/fragment_session__friends" />
+    <fragment
+        android:id="@+id/session_library_add_game"
+        android:name="com.example.gamection.Session_library_add_game"
+        android:label="fragment_session_library_add_game"
+        tools:layout="@layout/fragment_session_library_add_game" />
 </navigation>
