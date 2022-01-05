@@ -24,15 +24,40 @@
         <action
             android:id="@+id/action_session_LibraryFragment_to_session_library_add_game"
             app:destination="@id/session_library_add_game" />
+        <action
+            android:id="@+id/action_session_LibraryFragment_to_session_library_delete_game"
+            app:destination="@id/session_library_delete_game" />
     </fragment>
     <fragment
         android:id="@+id/session_FriendsFragment"
         android:name="com.example.gamection.Session_FriendsFragment"
         android:label="fragment_session__friends"
-        tools:layout="@layout/fragment_session__friends" />
+        tools:layout="@layout/fragment_session__friends" >
+        <action
+            android:id="@+id/action_session_FriendsFragment_to_session_Friends_add"
+            app:destination="@id/session_Friends_add" />
+        <action
+            android:id="@+id/action_session_FriendsFragment_to_session_Friends_delete"
+            app:destination="@id/session_Friends_delete" />
+    </fragment>
     <fragment
         android:id="@+id/session_library_add_game"
         android:name="com.example.gamection.Session_library_add_game"
         android:label="fragment_session_library_add_game"
         tools:layout="@layout/fragment_session_library_add_game" />
+    <fragment
+        android:id="@+id/session_library_delete_game"
+        android:name="com.example.gamection.session_library_delete_game"
+        android:label="fragment_session_library_delete_game"
+        tools:layout="@layout/fragment_session_library_delete_game" />
+    <fragment
+        android:id="@+id/session_Friends_add"
+        android:name="com.example.gamection.Session_Friends_add"
+        android:label="fragment_session__friends_add"
+        tools:layout="@layout/fragment_session__friends_add" />
+    <fragment
+        android:id="@+id/session_Friends_delete"
+        android:name="com.example.gamection.Session_Friends_delete"
+        android:label="fragment_session__friends_delete"
+        tools:layout="@layout/fragment_session__friends_delete" />
 </navigation>

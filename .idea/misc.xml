@@ -11,9 +11,12 @@
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_register_confirmation.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session__friends.xml" value="0.33" />
+        <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session__friends_add.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session__friends_delete.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session__library.xml" value="0.25" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session__profile.xml" value="0.33" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session_library_add_game.xml" value="0.25" />
+        <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/layout/fragment_session_library_delete_game.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1953125" />
         <entry key="..\:/Users/digit/AndroidStudioProjects/Gamection2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1953125" />
         <entry key="..\:/Users/digit/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_expandable_list_item_1.xml" value="0.1" />

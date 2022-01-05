@@ -5,12 +5,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -19,8 +22,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.io.Serializable
-import android.view.*
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,10 +30,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Session_LibraryFragment.newInstance] factory method to
+ * Use the [session_library_delete_game.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Session_LibraryFragment : Fragment() {
+class session_library_delete_game : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -45,15 +46,7 @@ class Session_LibraryFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_session__library, container, false)
-    }
-
-    fun anadir_pantalla_juegos(
+    fun borrar_pantalla_juegos(
         id_usuario: String,
         view: View,
         savedInstanceState: Bundle?
@@ -113,7 +106,7 @@ class Session_LibraryFragment : Fragment() {
                                 // Recorremos por consolas
 
                                 var layout =
-                                    view?.findViewById(R.id.id_linearlayout_library) as LinearLayout
+                                    view?.findViewById(R.id.id_linearlayout_library_delete_game) as LinearLayout
 
                                 var lista_juegos_fechados: ArrayList<String>
                                 lista_juegos_fechados = arrayListOf()
@@ -144,65 +137,16 @@ class Session_LibraryFragment : Fragment() {
                                         layout.addView(newbtn)
 
                                         newbtn.setOnClickListener {
-                                            val alertDialog = AlertDialog.Builder(context)
-                                            alertDialog.apply {
-                                                setTitle(nombre_juego)
+                                            Firebase.database("https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app/")
+                                                .getReference("usuarios/" + id_usuario + "/biblioteca/consolas/" + nombre_consola + "/" + nombre_juego)
+                                                .removeValue()
 
-                                                when (nombre_consola) {
-                                                    "PS1" -> setIcon(R.mipmap.ps1)
-                                                    "PS2" -> setIcon(R.mipmap.ps2)
-                                                    "PS3" -> setIcon(R.mipmap.ps3)
-                                                    "PSP" -> setIcon(R.mipmap.psp)
-                                                    "N64" -> setIcon(R.mipmap.n64)
-                                                    "GameCube" -> setIcon(R.mipmap.gamecube)
-                                                    "DS" -> setIcon(R.mipmap.ds)
-                                                    "GBA" -> setIcon(R.mipmap.gba)
-                                                    "Wii" -> setIcon(R.mipmap.wii)
-                                                }
-
-                                                setMessage(
-                                                    "Información:\n" +
-                                                            "- Plataforma: " + nombre_consola + "\n" +
-                                                            "- Género: " + genero_juego + "\n" +
-                                                            "- Fecha adición: " + fecha_juego
-                                                )
-                                            }.create().show()
+                                            layout.removeAllViews()
                                         }
                                     }
 
 
                                 }
-
-                                val nal = Navigation.findNavController(view)
-
-                                var boton_anadir_juego = Button(context);
-                                boton_anadir_juego.setText("Añadir juego")
-                                boton_anadir_juego.setTextColor(Color.WHITE)
-                                boton_anadir_juego.setBackgroundColor(Color.BLUE)
-                                layout.addView(boton_anadir_juego)
-
-                                boton_anadir_juego.setOnClickListener {
-                                    val bundle = Bundle()
-                                    nal.navigate(R.id.session_library_add_game, bundle)
-                                }
-
-                                var boton_borrar_juego = Button(context);
-                                boton_borrar_juego.setText("Borrar juego")
-                                boton_borrar_juego.setTextColor(Color.WHITE)
-                                boton_borrar_juego.setBackgroundColor(Color.RED)
-                                layout.addView(boton_borrar_juego)
-
-                                boton_borrar_juego.setOnClickListener {
-                                    val bundle = Bundle()
-                                    nal.navigate(R.id.session_library_delete_game, bundle)
-                                }
-
-                                var pantalla_juego_reciente =
-                                    view?.findViewById(R.id.text_juego_reciente) as TextView
-
-
-                                print("hola")
-
 
                             }
 
@@ -221,6 +165,14 @@ class Session_LibraryFragment : Fragment() {
     }
 
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_session_library_delete_game, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -232,11 +184,7 @@ class Session_LibraryFragment : Fragment() {
         val nal = Navigation.findNavController(view)
 
         val user = FirebaseAuth.getInstance().currentUser
-        anadir_pantalla_juegos(user?.uid.toString(), view, savedInstanceState);
-
-        var layout =
-            view?.findViewById(R.id.id_linearlayout_library) as LinearLayout
-
+        borrar_pantalla_juegos(user?.uid.toString(), view, savedInstanceState);
 
         val toast =
             Toast.makeText(this.context, "ESTOY EN LIBRERIA", Toast.LENGTH_SHORT)
@@ -251,12 +199,12 @@ class Session_LibraryFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Session_LibraryFragment.
+         * @return A new instance of fragment session_library_delete_game.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Session_LibraryFragment().apply {
+            session_library_delete_game().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
