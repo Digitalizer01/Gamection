@@ -173,29 +173,7 @@ class Session_LibraryFragment : Fragment() {
 
                                 }
 
-                                val nal = Navigation.findNavController(view)
 
-                                var boton_anadir_juego = Button(context);
-                                boton_anadir_juego.setText("Añadir juego")
-                                boton_anadir_juego.setTextColor(Color.WHITE)
-                                boton_anadir_juego.setBackgroundColor(Color.BLUE)
-                                layout.addView(boton_anadir_juego)
-
-                                boton_anadir_juego.setOnClickListener {
-                                    val bundle = Bundle()
-                                    nal.navigate(R.id.session_library_add_game, bundle)
-                                }
-
-                                var boton_borrar_juego = Button(context);
-                                boton_borrar_juego.setText("Borrar juego")
-                                boton_borrar_juego.setTextColor(Color.WHITE)
-                                boton_borrar_juego.setBackgroundColor(Color.RED)
-                                layout.addView(boton_borrar_juego)
-
-                                boton_borrar_juego.setOnClickListener {
-                                    val bundle = Bundle()
-                                    nal.navigate(R.id.session_library_delete_game, bundle)
-                                }
 
                                 var pantalla_juego_reciente =
                                     view?.findViewById(R.id.text_juego_reciente) as TextView
@@ -237,6 +215,27 @@ class Session_LibraryFragment : Fragment() {
         var layout =
             view?.findViewById(R.id.id_linearlayout_library) as LinearLayout
 
+        var boton_anadir_juego = Button(context);
+        boton_anadir_juego.setText("Añadir juego")
+        boton_anadir_juego.setTextColor(Color.WHITE)
+        boton_anadir_juego.setBackgroundColor(Color.BLUE)
+        layout.addView(boton_anadir_juego)
+
+        boton_anadir_juego.setOnClickListener {
+            val bundle = Bundle()
+            nal.navigate(R.id.session_library_add_game, bundle)
+        }
+
+        var boton_borrar_juego = Button(context);
+        boton_borrar_juego.setText("Borrar juego")
+        boton_borrar_juego.setTextColor(Color.WHITE)
+        boton_borrar_juego.setBackgroundColor(Color.RED)
+        layout.addView(boton_borrar_juego)
+
+        boton_borrar_juego.setOnClickListener {
+            val bundle = Bundle()
+            nal.navigate(R.id.session_library_delete_game, bundle)
+        }
 
         val toast =
             Toast.makeText(this.context, "ESTOY EN LIBRERIA", Toast.LENGTH_SHORT)

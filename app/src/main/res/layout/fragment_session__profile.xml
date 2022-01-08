@@ -14,41 +14,39 @@
             android:id="@+id/text_nombre_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_nombre_usuario"
-            app:layout_constraintBottom_toTopOf="@+id/button_editar_perfil"
+            android:text="Nombre"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_nick"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button_editar_perfil"
+        <TextView
+            android:id="@+id/text_nick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/profile_boton_editar_perfil"
-            app:layout_constraintBottom_toTopOf="@+id/button_consultar_coleccion"
+            android:layout_marginBottom="24dp"
+            android:text="Nick"
+            app:layout_constraintBottom_toTopOf="@+id/text_fechanacimiento"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/button_consultar_coleccion"
+        <TextView
+            android:id="@+id/text_fechanacimiento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:text="@string/profile_consultar_coleccion"
+            android:layout_marginBottom="24dp"
+            android:text="Fecha de nacimiento"
             app:layout_constraintBottom_toTopOf="@+id/text_juego_reciente"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/text_juego_reciente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="44dp"
-            android:text="@string/profile_juego_reciente"
+            android:layout_marginBottom="50dp"
+            android:text="- Juego reciente: ninguno"
             app:layout_constraintBottom_toTopOf="@+id/text_consola_favorita"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -57,51 +55,31 @@
             android:id="@+id/text_consola_favorita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="140dp"
-            android:text="@string/profile_consola_favorita"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="44dp"
+            android:text="- Consola favorita: ninguna"
+            app:layout_constraintBottom_toTopOf="@+id/button_consultar_coleccion"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button_consultar_coleccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="@string/profile_consultar_coleccion"
+            app:layout_constraintBottom_toTopOf="@+id/button_amigos"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button_amigos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="84dp"
             android:text="@string/profile_boton_amigos"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_consola_favorita" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="258dp"
-            android:layout_marginBottom="122dp"
-            android:text="Información:"
-            app:layout_constraintBottom_toTopOf="@+id/button_editar_perfil"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_informacion_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="78dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="180dp"
-            android:layout_marginBottom="686dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

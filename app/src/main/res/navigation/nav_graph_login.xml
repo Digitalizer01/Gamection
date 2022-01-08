@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_session_FriendsFragment_to_session_Friends_delete"
             app:destination="@id/session_Friends_delete" />
+        <action
+            android:id="@+id/action_session_FriendsFragment_to_session_Friends_show"
+            app:destination="@id/session_Friends_show" />
     </fragment>
     <fragment
         android:id="@+id/session_library_add_game"
@@ -60,4 +63,9 @@
         android:name="com.example.gamection.Session_Friends_delete"
         android:label="fragment_session__friends_delete"
         tools:layout="@layout/fragment_session__friends_delete" />
+    <fragment
+        android:id="@+id/session_Friends_show"
+        android:name="com.example.gamection.session_Friends_show"
+        android:label="fragment_session__friends_show"
+        tools:layout="@layout/fragment_session__friends_show" />
 </navigation>

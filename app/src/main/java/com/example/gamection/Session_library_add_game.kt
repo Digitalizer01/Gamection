@@ -68,7 +68,6 @@ class Session_library_add_game : Fragment() {
             opciones
         )
 
-
         var consoleOption = view.findViewById(R.id.spinner_consola) as Spinner
         opciones = arrayOf("PS1", "PS2", "PS3", "PSP", "N64", "GameCube", "DS", "GBA", "Wii")
         consoleOption.adapter = ArrayAdapter<String>(
@@ -79,7 +78,6 @@ class Session_library_add_game : Fragment() {
 
         Button_anadir_juego.setOnClickListener {
             if (nombre_juego.text.isNotEmpty()) {
-
 
                 val user = FirebaseAuth.getInstance().currentUser
 
