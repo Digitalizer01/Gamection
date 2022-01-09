@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -523,6 +524,13 @@ class session_Friends_show : Fragment() {
                 })
     }
 
+    fun anadir_icono_perfil(layout: LinearLayout) {
+        var imagen_perfil = ImageView(context)
+        imagen_perfil.setImageResource(R.mipmap.icono_perfil)
+        imagen_perfil.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        layout.addView(imagen_perfil)
+    }
+
     fun consola_favorita(id_usuario: String, layout: LinearLayout) {
         var cantidad_ps1 = 0;
         var cantidad_ps2 = 0;
@@ -819,6 +827,7 @@ class session_Friends_show : Fragment() {
         val user = FirebaseAuth.getInstance().currentUser
         anadir_pantalla_juegos(inputData.toString(), view, savedInstanceState);
 
+        anadir_icono_perfil(layout);
         nombres_usuarios_bd()
         poner_nombre_usuario(inputData.toString(), layout)
         poner_nick_usuario(inputData.toString(), layout)

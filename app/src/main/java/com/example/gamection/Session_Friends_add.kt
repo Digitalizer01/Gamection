@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
@@ -52,6 +49,13 @@ class Session_Friends_add : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_session__friends_add, container, false)
+    }
+
+    fun anadir_icono_amigos(layout: LinearLayout) {
+        var imagen_amigos = ImageView(context)
+        imagen_amigos.setImageResource(R.mipmap.amigos)
+        imagen_amigos.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        layout.addView(imagen_amigos)
     }
 
     fun anadir_pantalla_amigos(
@@ -154,6 +158,9 @@ class Session_Friends_add : Fragment() {
         val nal = Navigation.findNavController(view)
 
         val user = FirebaseAuth.getInstance().currentUser
+        var layout =
+            view?.findViewById(R.id.id_linearlayout_friends_add) as LinearLayout
+        anadir_icono_amigos(layout)
         anadir_pantalla_amigos(user?.uid.toString(), view, savedInstanceState);
 
     }

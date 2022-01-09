@@ -710,12 +710,6 @@ class Session_ProfileFragment : Fragment() {
 
         val user = FirebaseAuth.getInstance().currentUser
 
-
-        val toast =
-            Toast.makeText(context, user?.email.toString(), Toast.LENGTH_SHORT)
-        toast.setMargin(50f, 50f)
-        toast.show()
-
         nombres_usuarios_bd()
         poner_nick_usuario(user?.uid.toString())
         poner_fechanacimiento_usuario(user?.uid.toString())

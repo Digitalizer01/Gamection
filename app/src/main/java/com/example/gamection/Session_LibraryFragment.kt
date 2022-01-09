@@ -5,10 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -20,6 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.io.Serializable
 import android.view.*
+import android.widget.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,6 +48,13 @@ class Session_LibraryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_session__library, container, false)
+    }
+
+    fun anadir_icono_biblioteca(layout: LinearLayout) {
+        var imagen_biblioteca = ImageView(context)
+        imagen_biblioteca.setImageResource(R.mipmap.biblioteca)
+        imagen_biblioteca.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        layout.addView(imagen_biblioteca)
     }
 
     fun anadir_pantalla_juegos(
@@ -208,12 +212,12 @@ class Session_LibraryFragment : Fragment() {
         val inputData = args?.get("link")
 
         val nal = Navigation.findNavController(view)
-
-        val user = FirebaseAuth.getInstance().currentUser
-        anadir_pantalla_juegos(user?.uid.toString(), view, savedInstanceState);
-
         var layout =
             view?.findViewById(R.id.id_linearlayout_library) as LinearLayout
+
+        val user = FirebaseAuth.getInstance().currentUser
+        anadir_icono_biblioteca(layout)
+        anadir_pantalla_juegos(user?.uid.toString(), view, savedInstanceState);
 
         var boton_anadir_juego = Button(context);
         boton_anadir_juego.setText("Añadir juego")
@@ -237,10 +241,6 @@ class Session_LibraryFragment : Fragment() {
             nal.navigate(R.id.session_library_delete_game, bundle)
         }
 
-        val toast =
-            Toast.makeText(this.context, "ESTOY EN LIBRERIA", Toast.LENGTH_SHORT)
-        toast.setMargin(50f, 50f)
-        toast.show()
     }
 
     companion object {

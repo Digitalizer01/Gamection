@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
@@ -44,6 +41,13 @@ class session_library_delete_game : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    fun anadir_icono_biblioteca(layout: LinearLayout) {
+        var imagen_biblioteca = ImageView(context)
+        imagen_biblioteca.setImageResource(R.mipmap.biblioteca)
+        imagen_biblioteca.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        layout.addView(imagen_biblioteca)
     }
 
     fun borrar_pantalla_juegos(
@@ -141,7 +145,13 @@ class session_library_delete_game : Fragment() {
                                                 .getReference("usuarios/" + id_usuario + "/biblioteca/consolas/" + nombre_consola + "/" + nombre_juego)
                                                 .removeValue()
 
-                                            layout.removeAllViews()
+                                            val toast =
+                                                Toast.makeText(context, "Se ha borrado el juego", Toast.LENGTH_SHORT)
+                                            toast.setMargin(50f, 50f)
+                                            toast.show()
+                                            val nal = Navigation.findNavController(view)
+                                            val bundle = Bundle()
+                                            nal.navigate(R.id.session_LibraryFragment, bundle)
                                         }
                                     }
 
@@ -184,12 +194,13 @@ class session_library_delete_game : Fragment() {
         val nal = Navigation.findNavController(view)
 
         val user = FirebaseAuth.getInstance().currentUser
+
+        var layout =
+            view?.findViewById(R.id.id_linearlayout_library_delete_game) as LinearLayout
+
+        anadir_icono_biblioteca(layout)
         borrar_pantalla_juegos(user?.uid.toString(), view, savedInstanceState);
 
-        val toast =
-            Toast.makeText(this.context, "ESTOY EN LIBRERIA", Toast.LENGTH_SHORT)
-        toast.setMargin(50f, 50f)
-        toast.show()
     }
 
     companion object {

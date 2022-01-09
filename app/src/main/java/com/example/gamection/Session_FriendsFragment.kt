@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -51,6 +52,13 @@ class Session_FriendsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_session__friends, container, false)
+    }
+
+    fun anadir_icono_amigos(layout: LinearLayout) {
+        var imagen_amigos = ImageView(context)
+        imagen_amigos.setImageResource(R.mipmap.amigos)
+        imagen_amigos.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        layout.addView(imagen_amigos)
     }
 
     fun anadir_pantalla_amigos(
@@ -149,6 +157,7 @@ class Session_FriendsFragment : Fragment() {
 
 
         val user = FirebaseAuth.getInstance().currentUser
+        anadir_icono_amigos(layout)
 
         anadir_pantalla_amigos(user?.uid.toString(), view, savedInstanceState);
 
@@ -174,10 +183,6 @@ class Session_FriendsFragment : Fragment() {
             nal.navigate(R.id.session_Friends_delete, bundle)
         }
 
-        val toast =
-            Toast.makeText(this.context, "ESTOY EN LIBRERIA", Toast.LENGTH_SHORT)
-        toast.setMargin(50f, 50f)
-        toast.show()
     }
 
     companion object {

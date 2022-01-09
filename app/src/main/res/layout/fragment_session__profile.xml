@@ -10,16 +10,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="104dp"
+            android:layout_height="110dp"
+            android:src="@mipmap/icono_perfil"
+            app:layout_constraintBottom_toTopOf="@+id/text_nombre_usuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.74" />
+
         <TextView
             android:id="@+id/text_nombre_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="28dp"
             android:text="Nombre"
+            android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/text_nick"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/text_nick"
@@ -27,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Nick"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/text_fechanacimiento"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -37,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="Fecha de nacimiento"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/text_juego_reciente"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -45,8 +63,9 @@
             android:id="@+id/text_juego_reciente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="16dp"
             android:text="- Juego reciente: ninguno"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/text_consola_favorita"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -57,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="44dp"
             android:text="- Consola favorita: ninguna"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/button_consultar_coleccion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -65,18 +85,21 @@
             android:id="@+id/button_consultar_coleccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/profile_consultar_coleccion"
+            android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/button_amigos"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/button_amigos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="84dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/profile_boton_amigos"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
