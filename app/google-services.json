@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "684391747008",
-    "firebase_url": "https://gamectiondb-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "gamectiondb",
-    "storage_bucket": "gamectiondb.appspot.com"
+    "project_number": "---",
+    "firebase_url": "---",
+    "project_id": "---",
+    "storage_bucket": "---"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:684391747008:android:8eb0af11661bfd11e2cc25",
+        "mobilesdk_app_id": "---",
         "android_client_info": {
           "package_name": "com.example.gamection"
         }
       },
       "oauth_client": [
         {
-          "client_id": "684391747008-2cmbvomot83oe54i7ot27hmp7046j1a6.apps.googleusercontent.com",
+          "client_id": "---",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD_UrXXi-J69ICDh0HyTZqJ1AjPJcuCds8"
+          "current_key": "---"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "684391747008-2cmbvomot83oe54i7ot27hmp7046j1a6.apps.googleusercontent.com",
+              "client_id": "---",
               "client_type": 3
             }
           ]
